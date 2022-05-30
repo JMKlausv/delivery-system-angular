@@ -1,0 +1,16 @@
+<div class="cont">
+    <app-login *ngIf="isLogin"
+    (toggle)="toggleMode()"
+    (submit)="login($event)"
+    >
+
+    </app-login>
+    <app-signup *ngIf="!isLogin"
+    (toggle)="toggleMode()"
+    (submit)="signup($event)"
+    >
+
+    </app-signup>
+
+</div>
+   

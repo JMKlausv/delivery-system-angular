@@ -1,0 +1,25 @@
+<div>
+    <div class="card-header pb-0 pt-3 mt-3 header">
+       <label>Viechles</label>
+       <a routerLink="new" style="color:rgb(120, 158, 83); "> <img src="../../../assets/img/plus.svg" alt="">new</a>
+    </div>
+    <div *ngFor="let v of viechles ">
+        <div class="row m-3 " (click)="viewViechle(v.id)">
+            <div class="col-10  title">
+              veichle-  {{v.licenceNum}}
+            </div>
+            <div class="col-1">
+               <button class="btn edit-btn">
+                <img src="../../../assets/img/edit.svg" alt="edit">
+               </button>
+            </div>
+            <div class="col-1">
+                <button class="btn">
+                    <img src="../../../assets/img/remove.svg" alt="edit">
+                </button>
+             </div>
+        </div>
+       <hr>
+    </div>
+   
+</div>

@@ -1,0 +1,10 @@
+.header{
+    display:flex ;
+    justify-content:space-between
+}
+.edit-btn img{
+    color:rgb(100, 153, 21);
+}
+.title{
+    justify-content:center
+}

@@ -1,0 +1,24 @@
+<div class="wrapper">
+    <div class="login-cont">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-group" >
+            <div class="form-title">
+                 <legend>Login</legend>
+            </div>
+            <div class="form-input">
+                 <input type="text" formControlName="email" placeholder="Email">
+                 
+            </div>
+          <div class="form-input">
+               <input type="password" formControlName="password" placeholder="Password" >
+          </div>
+          <div class="form-button">
+               <button class="btn" type="submit">Login</button>
+          </div>
+          
+           <div class="toggle">
+            dont have account? <a (click)="onToggle($event)"> signup</a>
+        </div>
+        </form>
+    </div>
+   
+</div>

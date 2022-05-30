@@ -1,0 +1,55 @@
+
+<div class=" wrapper">
+<div class="row">
+    <div *ngIf="isAuth " class="col-3 m-0">
+        <div class="app" style="display: flex; height: 100vh; overflow:scroll initial m-0">
+            <CDBSidebar textColor="#ffffff" backgroundColor="tomato"  >
+                <CDBSidebarHeader [prefix]="icon" >
+                    <ng-template #icon>
+                        <i class="fa fa-bars fa-large"></i>
+                    </ng-template>
+        
+                    Delivery System
+                </CDBSidebarHeader>
+        
+                <CDBSidebarContent>
+                    <CDBSidebarMenu class="sidebar-content" default-open="true">
+                        <CDBSidebarMenuItem class="vv" style="padding-left: 25px;" routerLink='/dashboard' routerLinkActive="active">
+                           Dashboard                 
+                        </CDBSidebarMenuItem>               
+                        <CDBSidebarMenuItem style="padding-left: 25px;" routerLink='/product'  routerLinkActive="active" icon="">
+                              products          
+                        </CDBSidebarMenuItem>               
+                        <CDBSidebarMenuItem style="padding-left: 25px;" routerLink='/order'  routerLinkActive="active" icon="" >
+                           order                   
+                        </CDBSidebarMenuItem>               
+                        <CDBSidebarMenuItem style="padding-left: 25px;" routerLink='/viechle'  routerLinkActive="active" icon="" >
+                         viechle                 
+                        </CDBSidebarMenuItem>    
+                        <CDBSidebarMenuItem style="padding-left: 25px;" (click)="logout()">
+                            logout                 
+                           </CDBSidebarMenuItem>            
+                    </CDBSidebarMenu>
+                   
+                </CDBSidebarContent>
+                <div class="mt-auto">
+        
+                    <CDBSidebarFooter style="text-align: center; margin-top: auto;">
+                        <div class="sidebar-btn-wrapper" style="padding: 20px 5px">
+                            Sidebar Footer
+                        </div>
+                    </CDBSidebarFooter>
+                </div>
+            </CDBSidebar>
+        </div>
+    </div>
+    <div class="col-9 ">
+       
+        <router-outlet></router-outlet>
+    </div>
+</div>
+</div>
+
+
+  
+
