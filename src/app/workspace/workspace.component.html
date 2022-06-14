@@ -1,0 +1,70 @@
+
+
+
+<!-- <ejs-sidebar  id="default-sidebar" #sidebar (created)="onCreated($event)" style="visibility: hidden">
+    <div class="title">
+        <div>
+            <img src="../../../assets/img/icons8-in-transit-50.png" alt="">
+        </div>
+         Delivery system
+        </div>
+    <div class="menu-item">
+        <a routerLink='/ws/dashboard' routerLinkActive="active" (click)="changeTitle('Dashboard')" >Dashboard</a>
+    </div>
+    <div class="menu-item" *ngIf="isAdmin">
+        <a routerLink='/ws/product' routerLinkActive="active"(click)="changeTitle('Products')"  >Products</a>
+    </div>
+    <div class="menu-item">
+        <a routerLink='/ws/order' routerLinkActive="active" (click)="changeTitle('Orders')" >Orders</a>
+    </div>
+    <div class="menu-item" *ngIf="isAdmin">
+        <a routerLink='/ws/viechle' routerLinkActive="active" (click)="changeTitle('Viechles')"  >Viechles</a>
+    </div>
+    <div class="menu-item">
+        <label (click)="logout()">logout</label>
+    </div>
+</ejs-sidebar> -->
+
+
+  <!-- sidebar element declaration -->
+  <ejs-sidebar id="sidebar-treeview" class="dock-menu" #sidebarTreeviewInstance [enableDock]='enableDock' [width]='width' [dockSize]='dockSize' (created)="onCreated($event)" style="visibility: hidden"
+  [mediaQuery]='mediaQuery' [target]='target' (close)="onClose($event)" (click)="onNodeClicked($event)">
+  <div class="title">
+    <div>
+        <img src="../../../assets/img/icons8-in-transit-50.png" alt="">
+    </div>
+     Delivery system
+    </div>
+  <div class="main-menu">
+      <div>
+          <!-- Treevie element declaration -->
+          <ejs-treeview id="main-treeview" #treeviewInstance [fields]="field$ | async" expandOn='Click'></ejs-treeview>
+
+      </div>
+  </div>
+</ejs-sidebar>
+<!-- end of sidebar element -->
+
+
+
+
+
+<div>
+    <div class=" main-header">
+        <label class="title">{{title}}</label>
+        <div class="profile" (click)="onOpenDialog($event)">
+            <img src="../../../assets/img/icons8-person-30.png" alt="">
+            <div>
+                <label >{{user}}</label>
+            </div>
+        </div>
+        
+    </div>
+    <div #container class='root-container'></div>
+<ejs-dialog  [visible]="show" id='dialog' #ejDialog isModal='true' [position]="position"  (overlayClick)="onOverlayClick()"
+ [target]='targetElement' width='250px' ><button class="btn logout-btn" (click)="logout()">Logout</button> </ejs-dialog>
+    
+
+    <router-outlet></router-outlet>
+
+</div>

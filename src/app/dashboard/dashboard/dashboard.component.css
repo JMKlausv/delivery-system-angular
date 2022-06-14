@@ -1,6 +1,33 @@
+/* .control-section {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+}
 
+#defaultLayout {
+    padding: 10px;
+}
 
+#defaultLayout .e-panel .e-panel-container {
+    vertical-align: middle;
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+}
 
-/* 
-@import '../../../../node_modules/@syncfusion/ej2-base/styles/material.css';
-@import '../../../../node_modules/@syncfusion/ej2-angular-navigations/styles/material.css'; */
+.content {
+    line-height: 90px;
+}
+.e-dashboardlayout.e-control.e-responsive {
+    background: #b3d3ed;
+} */
+.e-card-image{
+    background-image: url('.././../../assets/img/endurance.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center 
+}
+.e-card-title{
+    font-size: 45;
+    font-weight: bold;
+}

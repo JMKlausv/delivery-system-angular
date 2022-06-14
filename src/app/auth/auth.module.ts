@@ -28,6 +28,9 @@ const routes: Routes = [
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes)
+  ],
+  providers: [
+    
   ]
 })
 export class AuthModule { }

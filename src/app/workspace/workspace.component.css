@@ -1,0 +1,242 @@
+/* .wrapper{
+    margin: 0
+} */
+.center-align {
+    text-align: center;
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+    font-size: 20px;
+    padding: 15px;
+    margin-bottom:10px;
+    margin-top:10px;
+}
+
+.sub-title {
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.center {
+    text-align: center;
+    display: none;
+    font-size: 13px;
+    font-weight: 400;
+    margin-top: 20px;
+}
+
+#wrapper {
+    display: block;
+}
+
+.sb-content-tab .center {
+    display: block;
+}
+
+.sb-content-tab #wrapper {
+    display: none;
+}
+
+.right {
+    float: right;
+}
+
+body {
+    margin: 0px;
+    
+    font-family: sans-serif;
+}
+
+#default-sidebar {
+    background-color: rgb(65, 65, 65);
+    width: 50%;
+  height: 100%;
+    padding-top: 3%;
+    color: #ffffff;
+}
+
+.close-btn:hover {
+    color: #fafafa;
+}
+.menu-item
+{
+ text-align:center!important;
+ padding: 20px;
+
+ width: 300px;
+ border-bottom: 1px solid transparent;
+}
+.menu-item:hover{
+    opacity: 0.5;
+    background-color: rgb(65, 65, 65);
+    cursor: pointer;
+}
+.menu-item :active{
+    border-right: 1px solid tomato;
+    border-bottom: 1px solid white;
+}
+.menu-item a{
+    color:#ffffff;
+    font-size: 18px;
+    text-decoration: none;
+}
+.menu-item label{
+    color:#ffffff;
+    font-size: 18px;
+}
+.main-header {
+background-color: rgb(255, 255, 255);
+margin: 0;
+padding:0;
+border-bottom:3px solid rgb(252, 249, 247) ;
+position: relative;
+display:flex;
+align-items: center;
+justify-content: space-between;
+
+}
+.profile{
+    padding: 0;
+   margin: 0 4%;
+color:rgb(163, 163, 163);
+    display:block;
+    text-align:center;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+.profile img{
+    border-radius: 50%;
+    padding:1px;
+    margin-top: 1px;
+    border: 1px solid tomato;
+}
+
+.e-dialog .e-dlg-content {
+    font-size: 10px;
+    font-weight: normal;
+    line-height: normal;
+}
+.e-dialog{
+    margin: 3%;
+    display:flex;
+    padding:2px !important;
+    align-items: center;
+    width: 10px;
+}
+/* .e-btn.e-flat.e-primary, .e-css.e-btn.e-flat.e-primary {
+    background-color: transparent;
+    border-color: transparent;
+    color: blue;
+} */
+.logout-btn{
+    background-color: tomato;
+    color:white;
+}
+
+
+
+
+/* ----------------------------------------- */
+
+#sidebar-treeview .e-treeview,
+#sidebar-treeview .e-treeview .e-ul {
+  padding: 0;
+  margin: 0;
+}
+  
+
+  /* content area styles */
+  #main-text.main-content {
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  #main-text .sidebar-content .line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+  }
+  
+  #main-text .sidebar-content {
+    padding: 15px;
+    
+    
+  }
+#sidebar-treeview #main-treeview .icon {
+    font-family: 'fontello';
+    font-size: 16px;
+  }
+  #sidebar-treeview #main-treeview .icon-microchip::before {
+    content: '\e806';
+  }
+  
+  #sidebar-treeview #main-treeview .icon-thumbs-up-alt::before {
+    content: '\e805';
+  }
+  
+  #sidebar-treeview #main-treeview .icon-docs::before {
+    content: '\e802';
+  }
+  
+  #sidebar-treeview #main-treeview .icon-th::before {
+    content: '\e803';
+  }
+  
+  #sidebar-treeview #main-treeview .icon-code::before {
+    content: '\e804';
+  }
+  
+  #sidebar-treeview #main-treeview .icon-chrome::before {
+    content: '\e807';
+  }
+  
+  #sidebar-treeview #main-treeview .icon-up-hand::before {
+    content: '\e810';
+  }
+  
+  #sidebar-treeview #main-treeview .icon-bookmark-empty::before {
+    content: '\e811';
+  }
+  
+  #sidebar-treeview #main-treeview .icon-help-circled::before {
+    content: '\e813';
+  }
+  
+  #sidebar-treeview #main-treeview .icon-doc-text::before {
+    content: '\e812';
+  }
+  
+  #sidebar-treeview #main-treeview .icon-circle-thin::before {
+    content: '\e808';
+  }
+  #sidebar-treeview #main-treeview .e-list-text {
+    padding: 0 11px;   
+    
+    /* color:rgb(250, 245, 245); */
+    font-size:16px;
+    font-family:sans-serif;
+
+  }
+  
+  .action {
+    visibility: hidden;
+  }
+  
+  .e-sidebar.e-open #main-treeview .e-text-content :hover{
+    padding: 0 0 0 24px;
+  }
+  
+  .e-sidebar.e-close #main-treeview .e-text-content {
+    padding: 0 0 0 8px;
+  
+  }
+
+  #sidebar-treeview{
+      background-color:rgb(56, 54, 54);
+      
+    
+  }

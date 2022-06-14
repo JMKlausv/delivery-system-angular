@@ -8,39 +8,32 @@ import { OrderModule } from './order/order.module';
 import { ProductModule } from './product/product.module';
 import { ViechleModule } from './viechle/viechle.module';
 import { DashboardModule } from '../app/dashboard/dashboard.module';
-import { SidebarModule } from 'ng-cdbangular';
+// import { SidebarModule } from 'ng-cdbangular';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth/auth.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CookieService } from 'ngx-cookie-service';
-
+import { GridModule } from '@syncfusion/ej2-angular-grids';
+import { PageService, SortService, FilterService, GroupService } from '@syncfusion/ej2-angular-grids';
+import { AdminGuard } from './shared/admin.guard';
+import { WorkspaceComponent } from './workspace/workspace.component';
+// import { SidebarModule } from '@syncfusion/ej2-angular-navigations';
 const routes: Routes = [
+  {
+    path: '',
+  //loadChildren: ()=>import('../app/auth/auth.module').then(m=>m.AuthModule)
+    redirectTo: 'auth', pathMatch: 'full'
+  },
   {
     path: 'auth',
     loadChildren: ()=>import('../app/auth/auth.module').then(m=>m.AuthModule)
   },
+ 
   {
-    path: 'dashboard',
-    canLoad:[AuthGuard],
-    loadChildren: ()=>import('../app/dashboard/dashboard.module').then(m=>m.DashboardModule)
-  },
-  {
-    path: 'order',
-    canLoad:[AuthGuard],
-    loadChildren: ()=>import('../app/order/order.module').then(m=>m.OrderModule)
-  },
-  {
-    path: 'product',
-    canLoad:[AuthGuard],
-    loadChildren: ()=>import('../app/product/product.module').then(m=>m.ProductModule)
-  },
-  {
-    path: 'viechle',
-    canLoad:[AuthGuard],
-    loadChildren: ()=>import('../app/viechle/viechle.module').then(m=>m.ViechleModule)
-  },
-  {
-    path: '',   redirectTo: 'auth', pathMatch: 'full'
+    path: 'ws',
+    canLoad: [AuthGuard],
+    component:WorkspaceComponent,
+    loadChildren: ()=>import('../app/workspace/workspace.module').then(m=>m.WorkspaceModule)
   },
   {
     path: '**', 
@@ -55,19 +48,23 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    // SidebarModule,
     AuthModule,
+    GridModule,
     OrderModule,
     ProductModule,
     ViechleModule,
     DashboardModule,
     HttpClientModule,
-    SidebarModule,
+    // SidebarModule,
     RouterModule.forRoot(routes),
   
   ],
   providers: [
-  AuthGuard,
-  CookieService
+    AuthGuard,
+    CookieService,
+    PageService,
+  
   ],
   bootstrap: [AppComponent]
 })

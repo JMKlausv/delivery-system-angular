@@ -1,0 +1,15 @@
+.button-group{
+    margin-top: 60px;
+    margin-bottom: 30px;
+    padding-left:50px;
+}
+.button-group button {
+    margin-right:30px;
+}
+#btn-submit{
+    background-color:rgb(59, 192, 59)!important;
+}
+#btn-reset{
+    background-color:tomato!important;
+    color:white !important;
+}

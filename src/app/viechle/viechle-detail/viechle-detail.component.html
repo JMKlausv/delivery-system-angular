@@ -1,29 +1,29 @@
 
 <div class="wrapper">
     <div>
-        <legend>Add new veichles</legend>
+        <legend>Edit veichle</legend>
     </div>
-    <form [formGroup]="form" (ngSubmit)="addViechlesToDb()" novalidate>
+    <form [formGroup]="form" (ngSubmit)="editViechle()" novalidate>
 <div class="form-cont">
     <div class="form-group">
         <label>
             Licence plate number
         </label>
-        <input type="text" formControlName="licenceNum" [ngModel]>
+        <input type="text" formControlName="licenceNum" >
     </div>
 
-    <div class="form-group">
+    <div class="form-group"> 
         <label>
             Viechle model
         </label>
-        <input type="text" formControlName="model" [ngModel]>
+        <input type="text" formControlName="model" >
     </div>
 
     <div class="form-group">
         <label>
             Viechle type
         </label>
-        <input type="text" formControlName="type" [ngModel]>
+        <input type="text" formControlName="type" >
     </div>
 </div>
         <div class="button-group">

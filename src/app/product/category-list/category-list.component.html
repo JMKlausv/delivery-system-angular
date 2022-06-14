@@ -1,0 +1,23 @@
+<div>
+    <div class="card-header pb-0 pt-3 mt-3 header">
+        <label>Categories</label>
+        <a routerLink="new" style="color:rgb(120, 158, 83); "> <img src="../../../assets/img/plus.svg" alt="">new</a>
+     </div>  
+    <!-- <ejs-grid  #grid  [dataSource]='categories' [allowPaging]="true"  [editSettings]='editSettings' [pageSettings]='pageSettings'  (commandClick)='commandClick($event)' height='310px'>
+        <e-columns>
+            <e-column field='id' headerText='Product Id' textAlign='left' width=90></e-column>
+            <e-column field='name' headerText='product-name' width=100></e-column>
+            <e-column headerText='commands' width=100 [commands]='commands' textAlign="center">
+              
+            </e-column>
+        </e-columns>
+        </ejs-grid> -->
+        <app-ejs-grid
+        [data]="categories"
+        [columnData]="columnData"
+        (delete)="deleteCategory($event)"
+        (edit)="editCategory($event)"
+        >
+
+        </app-ejs-grid>
+</div>

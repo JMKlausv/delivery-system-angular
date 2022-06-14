@@ -1,0 +1,61 @@
+ <!-- <div class="control-section">
+        <ejs-dashboardlayout id='defaultLayout' #defaultLayout [columns]='3' [cellSpacing]='cellSpacing' [panels]='panels'>
+        </ejs-dashboardlayout>
+    </div> -->
+
+
+<div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <div tabindex="0" class="e-card" id="basic">
+                <div class="e-card-header">
+                    <div class="e-card-header-caption">
+                        <div class="e-card-title">{{orderCount}}</div>
+                    </div>
+                </div>
+                <div class="e-card-content">
+                 Orders 
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div tabindex="0" class="e-card" id="basic">
+                <div class="e-card-header">
+                    <div class="e-card-header-caption">
+                        <div class="e-card-title">{{productCount}}</div>
+                    </div>
+                </div>
+                <div class="e-card-content">
+                 products
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div tabindex="0" class="e-card" id="basic">
+                <div class="e-card-header">
+                    <div class="e-card-header-caption">
+                        <div class="e-card-title">{{veichleCount}}</div>
+                    </div>
+                </div>
+                <div class="e-card-content">
+                 Viechles
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row mt-4">
+         <div class="col">
+            <div class = "e-card">
+              <app-piechart></app-piechart>
+              </div>
+         </div>
+         <div class="col">
+            <div class = "e-card">
+               <app-chart></app-chart>
+
+              </div>
+         </div>
+    </div>
+
+</div>

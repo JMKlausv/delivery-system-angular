@@ -8,6 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminGuard } from '../shared/admin.guard';
 import { ViechleDetailComponent } from './viechle-detail/viechle-detail.component';
 import { ViechleResolve } from './viechle.resolve';
+import { SharedModule } from '../shared/shared.module';
+import { PageService, SortService, FilterService, GroupService , CommandColumnService  } from '@syncfusion/ej2-angular-grids';
 
 
 
@@ -17,20 +19,23 @@ const routes: Routes = [
    canActivate:[AdminGuard],
     children: [
       {
-        path: '',
+        path: '', pathMatch:'full',
         component: ViechleListComponent
       },
       {
+        path: 'new',
+        pathMatch:'full',
+        component:AddViechleComponent
+      },
+      {
         path: ':id',
+         pathMatch:'full',
         component: ViechleDetailComponent,
         resolve: {
           viechle: ViechleResolve
         }
       },
-      {
-        path: 'new',
-        component:AddViechleComponent
-      }
+   
     ]
   }
  
@@ -46,12 +51,18 @@ const routes: Routes = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ]
   ,
   providers: [
     AdminGuard,
-    ViechleResolve
+    ViechleResolve,
+    PageService,
+    SortService,
+    FilterService,
+    GroupService,
+    CommandColumnService 
   ]
 })
 export class ViechleModule { }

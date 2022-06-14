@@ -1,7 +1,8 @@
-
+<!-- 
 <div class=" wrapper">
 <div class="row">
     <div *ngIf="isAuth " class="col-3 m-0">
+
         <div class="app" style="display: flex; height: 100vh; overflow:scroll initial m-0">
             <CDBSidebar textColor="#ffffff" backgroundColor="tomato"  >
                 <CDBSidebarHeader [prefix]="icon" >
@@ -23,7 +24,7 @@
                         <CDBSidebarMenuItem style="padding-left: 25px;" routerLink='/order'  routerLinkActive="active" icon="" >
                            order                   
                         </CDBSidebarMenuItem>               
-                        <CDBSidebarMenuItem style="padding-left: 25px;" routerLink='/viechle'  routerLinkActive="active" icon="" >
+                        <CDBSidebarMenuItem style="padding-left: 25px;" routerLink='/viechle' routerLinkActive="active" icon="" >
                          viechle                 
                         </CDBSidebarMenuItem>    
                         <CDBSidebarMenuItem style="padding-left: 25px;" (click)="logout()">
@@ -43,8 +44,9 @@
             </CDBSidebar>
         </div>
     </div>
+   
     <div class="col-9 ">
-       
+
         <router-outlet></router-outlet>
     </div>
 </div>
@@ -52,4 +54,57 @@
 
 
   
+ -->
+ <!-- <ejs-sidebar *ngIf="isAuth " id="default-sidebar" #sidebar (created)="onCreated($event)" style="visibility: hidden">
+    <div class="title"> Sidebar content</div>
+    <div class="menu-item">
+        <a routerLink='/dashboard' routerLinkActive="active" >Dashboard</a>
+    </div>
+    <div class="menu-item">
+        <a routerLink='/product' routerLinkActive="active" >Products</a>
+    </div>
+    <div class="menu-item">
+        <a routerLink='/order' routerLinkActive="active" >Orders</a>
+    </div>
+    <div class="menu-item">
+        <a routerLink='/viechle' routerLinkActive="active" >Viechles</a>
+    </div>
+    <div class="menu-item">
+        <label (click)="logout()">logout</label>
+    </div>
+</ejs-sidebar> -->
+
+    <!-- <div class=" main-header">Main content</div> -->
+    <router-outlet></router-outlet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

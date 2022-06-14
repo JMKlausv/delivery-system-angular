@@ -11,10 +11,10 @@
 
     margin:auto;
     background-color:white;
-    width:40%;
+    width:30%;
     display: flex;
     padding-bottom: 60px ;
-    margin-left: 45%;
+    /* margin-left: 45%; */
     padding-top:50px;
     /* justify-self: center; */
     justify-content:center;
@@ -37,11 +37,12 @@
 
 }
 .form-input input{
-    border:0;
+    /* border:0; */
     width:100%;
-    padding: 20px;
+    padding: 15px;
     margin-left: 10px;
     margin-right: 10px;
+    margin-bottom: 10px;
     /* border-bottom: 0.5px solid rgb(231, 231, 231); */
 
 }

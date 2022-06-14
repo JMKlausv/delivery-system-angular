@@ -1,0 +1,131 @@
+<div class="wrapper">
+    <div>
+        <legend>Add new order</legend>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="addOrderToDb()" novalidate>
+<div class="form-cont">
+<!-- --------------------------------------------------------------------------- -->
+
+<div>
+    <hr>
+    <label >Address Information</label>
+    <hr>
+    <div class="form-group">
+        <label>
+            Region
+        </label>
+        <ejs-dropdownlist id='ddlelement'  [dataSource]='regionList'  placeholder='Select a Region' formControlName="region" ></ejs-dropdownlist>
+    </div>
+    <div class="form-group">
+        <label>
+            City
+        </label>
+        <ejs-dropdownlist id='ddlelement'  [dataSource]='cityList'  placeholder='Select a city' formControlName="city" ></ejs-dropdownlist>
+    </div>
+    <div class="form-group">
+        <label>
+            specific Address
+        </label>
+        <input type="text" formControlName="specificAddress">
+         </div>
+    <div class="form-group">
+        <label>
+            custormer Email
+        </label>
+        <input type="email" formControlName="customerEmail">
+     </div>
+     
+     <div class="form-group">
+        <label>
+            phone 
+        </label>
+        <input type="tel" formControlName="phone">
+     </div>
+ 
+</div>
+<!--  -->
+    <hr>
+    <label>
+        Order Information
+    </label>
+    <hr>
+    <div class="form-group">
+        <label>
+            Viechle
+        </label>
+        <ejs-dropdownlist id='ddlelement'  [dataSource]='viechleList' [fields]='vFields' placeholder='Select a viechle' formControlName="viechle" ></ejs-dropdownlist>
+    </div>
+     
+    <div class="form-group">
+        <label>
+            Order date
+        </label>
+        <input type="date" formControlName="orderDate">
+    </div>
+
+    <div class="form-group">
+        <label>
+            Delivery date
+        </label>
+        <input type="date" formControlName="deliveryDate">
+    </div>
+    
+    <div class="products">
+        <hr>
+        <label>
+            Product Information
+        </label>
+        <hr>
+        <div class="products-input-group">
+            <div class="x">
+            <label>
+              Category
+            </label>
+            </div>
+            <ejs-dropdownlist id='ddlelement2' [dataSource]='categoryList' [fields]="cFields" (change)="onCategoryChange($event)" formControlName="category" placeholder='Select a category'></ejs-dropdownlist>
+
+            <label>
+               Prooduct
+            </label>
+            
+            <ejs-dropdownlist id='ddlelement3' [dataSource]='productList' [fields]="pFields" formControlName="product" placeholder='Select a product'></ejs-dropdownlist>
+        </div>
+        <div class="products-input-group" id="quantity">
+            <label>
+                quantity
+            </label>
+            <input type="number" formControlName="quantity">
+        </div>
+        <app-shared-button-add (add)="addProduct()"></app-shared-button-add>
+    </div>
+   
+</div>
+        <div formArrayName="products" >
+            <div *ngFor="let p of productArray.controls; let i=index">
+                <div class="product-content" [formGroupName]="i" class="dynamic-items">
+
+                            <ejs-grid  #grid  [dataSource]='selectedProducts' [allowPaging]="true"   [pageSettings]='pageSettings'  (commandClick)='commandClick($event)' > 
+                                <e-columns>
+                                    <e-column field='product.name' headerText='Product' width=100 ></e-column>
+                                    <e-column field='product.price' headerText='unit price' width=100 ></e-column>
+                                    <e-column field='quantity' headerText='Quantity' textAlign='left'  width=90 ></e-column>
+                                    <e-column field='totalPrice' headerText='Total price' textAlign='left'  width=100 ></e-column>
+                                    <e-column headerText='commands' width=100 [commands]='commands' textAlign="center">
+                                    </e-column>
+                                </e-columns>
+                                <e-aggregates>
+                                    <e-aggregate>
+                                        <e-columns>
+                                            <e-column field="totalPrice" type="sum">
+                                                <ng-template #footerTemplate let-data>Total: {{data.sum}}</ng-template>
+                                            </e-column>
+                                        </e-columns>
+                                    </e-aggregate>
+                                </e-aggregates>
+                            </ejs-grid>
+                </div>
+            </div>
+        </div>
+        <app-shared-button-group (cancel)="cancel()"></app-shared-button-group>
+    </form>
+</div>

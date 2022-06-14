@@ -6,8 +6,8 @@ import { AuthService } from "./auth.service";
 export class AuthGuard implements   CanLoad{
   constructor(private authService:AuthService){}
   canLoad(route: Route, segments: UrlSegment[]): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-   // return this.authService.checkPermission();
-    return true;
+   return this.authService.checkPermission();
+
 
   }
 

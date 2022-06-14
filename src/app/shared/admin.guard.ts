@@ -5,10 +5,15 @@ import { AuthService } from '../auth/auth.service'
 @Injectable()
 export class AdminGuard implements   CanActivate{
   constructor(private authService:AuthService){}
+  // canLoad(route: Route, segments: UrlSegment[]): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+  //   return this.authService.checkAdminPrivellage();
+   
+  // }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     return this.authService.checkAdminPrivellage();
    
   }
+  
 
 
 }

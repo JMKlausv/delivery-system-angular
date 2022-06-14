@@ -10,7 +10,7 @@
         </label>
         <input type="text" formControlName="licenceNum">
     </div>
-
+     
     <div class="form-group">
         <label>
             Viechle model
@@ -24,30 +24,37 @@
         </label>
         <input type="text" formControlName="type">
     </div>
-    <button  id="add-btn"
-    class="btn " style="background-color:rgb(32, 165, 114); color:white" type="button"
-    (click)="addViechle()"
-    >
-    add
-</button>
+   <app-shared-button-add (add)="addViechle()"></app-shared-button-add>
 </div>
-        
+
         <div formArrayName="viechles" >
             <div *ngFor="let v of viechleArray.controls; let i=index">
                 <div class="veichle-content" [formGroupName]="i" class="dynamic-items">
 
-                    Viechle- <input type="text" [ngModel] formControlName="licenceNum">
+                    <!-- Viechle- <input type="text" [ngModel] formControlName="licenceNum">
                     model- <input type="text" [ngModel] formControlName="model">
                     type- <input type="text" [ngModel] formControlName="type">
                     <button class="btn" (click)="removeViechle(i)"><img
-                            src="../../../assets/img/icons8-close-window-35.png" alt=""></button>
+                            src="../../../assets/img/icons8-close-window-35.png" alt=""></button> -->
+
+                            <ejs-grid  #grid  [dataSource]='data' [allowPaging]="true"   [pageSettings]='pageSettings'  (commandClick)='commandClick($event)' > 
+                                <e-columns>
+                                    <e-column field='model' headerText='Model' width=100 ></e-column>
+                                    <e-column field='type' headerText='Type' textAlign='left'  width=90 ></e-column>
+                                    <e-column field='licenceNum' headerText='Licence plate' textAlign='left'  width=100 ></e-column>
+                                    <e-column headerText='commands' width=100 [commands]='commands' textAlign="center">
+                                    </e-column>
+                                </e-columns>
+                            </ejs-grid>
                 </div>
             </div>
         </div>
-        <div class="button-group">
+   
+        <!-- <div class="button-group">
               <button  id="btn-submit"
                class="btn" type="submit">submit</button>
               <button id="btn-reset" class="btn" type="button" (click)="cancel()">cancel</button>
-        </div>
+        </div> -->
+        <app-shared-button-group (cancel)="cancel()"></app-shared-button-group>
     </form>
 </div>

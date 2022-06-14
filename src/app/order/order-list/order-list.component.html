@@ -1,0 +1,13 @@
+<div>
+    <div class="card-header pb-0 pt-3 mt-3 header">
+        <label>Orders</label>
+        <a routerLink="new" style="color:rgb(120, 158, 83); "> <img src="../../../assets/img/plus.svg" alt="">new</a>
+     </div>
+<app-ejs-grid
+[data]="orderData$ | async"
+[columnData]="columnData"
+(delete)="deleteOrder($event)"
+(edit)="viewOrder($event)"
+>
+</app-ejs-grid>
+    </div>

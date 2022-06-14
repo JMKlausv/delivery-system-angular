@@ -1,0 +1,8 @@
+<ejs-grid  #grid  [dataSource]='data' [allowPaging]="true"  [editSettings]='editSettings' [pageSettings]='pageSettings'  (commandClick)='commandClick($event)' height='310px'>
+    <e-columns>
+        <e-column  *ngFor="let col of columnData"
+        [field]='col.field' [headerText]='col.headerText' textAlign='left'  width=100></e-column>
+        <e-column headerText='commands' width=100 [commands]='commands' textAlign="center">
+        </e-column>
+    </e-columns>
+    </ejs-grid>

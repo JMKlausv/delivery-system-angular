@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../model/user.interface';
-import { Subject } from 'rxjs';
-import { tap , switchMap } from 'rxjs/operators';
-import { collectExternalReferences } from '@angular/compiler';
+import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
  interface AuthResponseData{
@@ -23,25 +21,18 @@ const API: string = "https://delivery-system-angular-default-rtdb.firebaseio.com
   providedIn: 'root'
 })
 export class AuthService {
-  isAuth = false;
-  isAdmin = false;
+  isAuth = new Subject<boolean>();
+  isAdmin = new Subject<boolean>();
   user = new Subject<User>();
   expDate!: Date;
   idToken!: string;
   constructor(private http: HttpClient, private router: Router, private cookies: CookieService) {
-    this.isAuth = this.cookies.check('user');
-    this.isAdmin = this.cookies.get('previllage') == 'admin';
-    this.user?.subscribe(user => {
-      this.isAdmin = user?.previllage == 'admin';
-    })
-
   }
   private setCookies(user:User,idToken:string) {
-    this.cookies.set('userId', user.localId,this.expDate);
-    this.cookies.set('email', user.email,this.expDate);
-    this.cookies.set('previllage', user.previllage,this.expDate);
-    this.cookies.set('idToken', idToken, this.expDate)
-    
+    this.cookies.set('userId', user.localId,user.expDate);
+    this.cookies.set('email', user.email,user.expDate);
+    this.cookies.set('previllage', user.previllage,user.expDate);
+    this.cookies.set('idToken', idToken, user.expDate);
   }
   login(email: string, password: string) {
     
@@ -53,7 +44,7 @@ export class AuthService {
       }
     ).toPromise().then((res) => {
       this.expDate = new Date(new Date().getTime() + +res.expiresIn * 1000);
-
+      this.idToken = res.idToken;
       return this.http.get<User>(API + '/users/'+res.localId+'.json').toPromise();
      
     
@@ -62,7 +53,9 @@ export class AuthService {
       const user: User = { localId: userRes.localId, email: userRes.email, previllage: userRes.previllage, expDate: this.expDate, idToken: this.idToken };
       this.user?.next(user);
       this.setCookies(user, this.idToken);
-    
+      this.isAuth.next( this.cookies.check('user'));
+      this.isAdmin.next(this.cookies.get('previllage') == 'admin');
+    console.log('loginnnnnnnn',this.cookies.get('previllage'))
     })
 
   }
@@ -77,21 +70,31 @@ export class AuthService {
         const user: User = { localId: res.localId, email: res.email, previllage: 'system-user', expDate: expDate, idToken: res.idToken };
        return this.http.put(API + '/users/'+res.localId+'.json', {localId:user.localId,email:user.email,previllage:user.previllage}).toPromise().then((res) => {
           this.user?.next(user);
-         this.setCookies(user,this.idToken)
+         this.setCookies(user, this.idToken)
+         this.isAuth.next( this.cookies.check('user'));
+         this.isAdmin.next(this.cookies.get('previllage') == 'admin');
         });
       })
   }
 
   logout() {
     this.user?.next(undefined);
-    this.isAuth = false;
-    this.router.navigate(['/auth']);
+    this.isAuth.next(false);
     this.cookies.deleteAll();
+    console.log('logout cookies are.....', this.cookies.getAll())
+    console.log(this.cookies.check('idToken'));
+    this.router.navigate(['/']);
   }
   checkPermission() {
-    return this.isAuth;
+    return this.cookies.check('idToken');
   }
   checkAdminPrivellage() {
-    return this.isAdmin;
+    return this.cookies.get('previllage') == 'admin';
+  }
+  checkAuth(): Observable<boolean>{
+    let isAuth: boolean = this.cookies.check('idToken');
+    const auth$ = new Subject<boolean>();
+    auth$.next(isAuth)
+    return auth$;
   }
 }

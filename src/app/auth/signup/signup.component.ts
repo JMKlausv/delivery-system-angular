@@ -16,11 +16,13 @@ export class SignupComponent implements OnInit {
   toggle: EventEmitter<any> = new EventEmitter<any>();
   @Output()
   submit: EventEmitter<any> = new EventEmitter<any>();
+  
 
   constructor() { }
 
   ngOnInit(): void {
   }
+
   onToggle(event: any) {
       this.toggle.emit(event);
   }
