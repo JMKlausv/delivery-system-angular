@@ -26,11 +26,6 @@ export class CategoryListComponent implements OnInit {
     this.productService.fetchCategories().subscribe(res => {
       this.categories = res;
     })
-    this.pageSettings = { pageSize: 6 };
-    this.editSettings = { allowEditing: true, allowDeleting: true };
-    this.commands = [{ buttonOption: { content: 'edit', cssClass: 'btn edit-btn' } },
-    { buttonOption: { content: 'delete', cssClass: 'btn delete-btn' } }
-    ];
   }
   editCategory(rowData:any){
 

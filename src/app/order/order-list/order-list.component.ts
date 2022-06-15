@@ -46,7 +46,7 @@ export class OrderListComponent implements OnInit {
   }
   viewOrder(rowData: any) {
   
-   this.router.navigate(['/ws/order',rowData.id])
+   this.router.navigate(['/ws/order/new'],{queryParams:{id:rowData.id}})
   }
   deleteOrder(rowData: any) {
     if (window.confirm('are you sure')) {

@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { CommandModel, GridComponent, PageSettingsModel } from '@syncfusion/ej2-angular-grids';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, pluck } from 'rxjs/operators';
 import { Category } from 'src/app/model/category.interface';
 import { Order } from 'src/app/model/order.interface';
 import { Product } from 'src/app/model/product.interface';
@@ -17,6 +18,8 @@ const API = 'https://delivery-system-angular-default-rtdb.firebaseio.com/';
   styleUrls: ['./add-order.component.css']
 })
 export class AddOrderComponent implements OnInit {
+
+
   public order!: Order;
   public viechleList: Viechle[] = [];
   public productList: Product[] = [];
@@ -51,6 +54,8 @@ export class AddOrderComponent implements OnInit {
     products: new FormArray([
     ])
   })
+  constructor(private router: Router, private orderService: OrderService, private sharedService: SharedService, private route:ActivatedRoute) { }
+  order$: Observable<Order> = this.route.data?.pipe(pluck('order'));
   get productArray(): FormArray {
     return (this.form.get('products') as FormArray);
   }
@@ -91,7 +96,6 @@ export class AddOrderComponent implements OnInit {
   get quantity(): FormControl {
     return (this.form.get('quantity') as FormControl);
   }
-  constructor(private router: Router, private orderService: OrderService, private sharedService: SharedService) { }
 
   private fetchViechles() {
    return   this.sharedService.fetchAll('https://delivery-system-angular-default-rtdb.firebaseio.com/viechles.json').pipe(map(res => {
@@ -140,9 +144,9 @@ export class AddOrderComponent implements OnInit {
    
 }
 
- 
   ngOnInit(): void {
     this.pageSettings = { pageSize: 6 };
+    
     this.commands = [
       { buttonOption: { content: 'x', cssClass: '' } }
     ];

@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { AggregateService } from '@syncfusion/ej2-angular-grids';
 import { JoinPipe } from '../shared/join.pipe';
+import { OrderResolve } from './order.resolve';
 const routes: Routes = [
   {
     path: '',
@@ -18,7 +19,10 @@ const routes: Routes = [
       },
       {
         path: 'new',
-        component:AddOrderComponent
+        component:AddOrderComponent,
+        resolve:{
+        order:  OrderResolve
+        }
       },
       {
         path: ':id',
@@ -43,7 +47,8 @@ const routes: Routes = [
   ],
   providers: [
     AggregateService,
-    JoinPipe
+    JoinPipe,
+    OrderResolve
    
   ]
 })

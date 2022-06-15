@@ -53,7 +53,7 @@ public dockSize:string ="44px";
 public mediaQuery: string = ('(min-width: 600px)');
 public target: string = '.main-content';
 public data:Object =[ {
-  nodeId: '01', nodeText: 'Dashboard', iconCss: 'icon-microchip icon',
+  nodeId: '01', nodeText: 'Dashboard', cssClass: 'e-flat', iconCss: 'e-icons e-search',
   url:'/ws/dashboard'
 },
 
@@ -78,10 +78,6 @@ public field:Object ={ dataSource: this.data, id: 'nodeId', text: 'nodeText', ch
 public field$:BehaviorSubject<Object>=new BehaviorSubject<Object>(this.field);
   constructor(private authService: AuthService , private router:Router,private asyncPipe:AsyncPipe) {  
   }
-
-
-
-  // To get all element of the dialog component after component get initialized.
   ngOnInit() {
     this.initilaizeTarget();
     if (this.authService.checkAdminPrivellage()) {
@@ -165,13 +161,15 @@ this.targetElement = this.container.nativeElement.parentElement;
       } 
       else if(d.selected && d.url){
      
-      this.router.navigate([d.url])
+      this.router.navigate([d.url]);
+      this.changeTitle(d.nodeText as string);
       }
       else if(d.nodeChild){
       let children = d.nodeChild as Array<any>;
        children.forEach(child=>{
       if(child.selected){
-       this.router.navigate([child.url])
+       this.router.navigate([child.url]);
+       this.changeTitle(d.nodeText as string)
         }  
       })
     }
