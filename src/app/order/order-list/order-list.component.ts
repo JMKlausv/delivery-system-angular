@@ -28,7 +28,7 @@ export class OrderListComponent implements OnInit {
       this.orders.forEach(o => {
         let productNames: string[] = [];
         o.products.forEach(p => {
-          productNames.push(p.productName);
+          productNames.push(p.product.name);
         })
            this.orderData.push(
           {
@@ -52,7 +52,9 @@ export class OrderListComponent implements OnInit {
     if (window.confirm('are you sure')) {
       
       this.orderService.deleteOrder(rowData.id).then(res => {
+        console.log('refreshing........')
         this.ngOnInit();
+        
       })
     }
   }

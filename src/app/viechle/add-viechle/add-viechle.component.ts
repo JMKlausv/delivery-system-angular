@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, RequiredValidator, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommandModel, GridComponent, PageSettingsModel } from '@syncfusion/ej2-angular-grids';
+import { Observable } from 'rxjs';
+import { pluck } from 'rxjs/operators';
 import { Viechle } from 'src/app/model/viechle.interface';
 import { ViechleService } from '../viechle.service';
 
@@ -11,6 +13,10 @@ import { ViechleService } from '../viechle.service';
   styleUrls: ['./add-viechle.component.css']
 })
 export class AddViechleComponent implements OnInit {
+  public viechle$: Observable<Viechle> = this.route.data.pipe(pluck("viechle"));
+  public mode!: string;
+  public title!:string;
+  public viechleId!:any;
   public data: Viechle[] = [];
   public pageSettings!: PageSettingsModel;
   public commands!: CommandModel[];
@@ -35,10 +41,25 @@ export class AddViechleComponent implements OnInit {
   get licenceNum():FormControl {
     return (this.form.get('licenceNum') as FormControl) ;
   }
-  constructor(private router:Router,private viechleService:ViechleService ) { }
+  constructor(private router:Router,private viechleService:ViechleService , private route:ActivatedRoute) { }
+
+private initializeValues(){
+  this.viechle$.subscribe(v=>{
+    if(v){
+      this.mode = "update";
+      this.title = "Update veichle";
+      this.form.patchValue(v);
+      this.viechleId = v.id;
+    }else{
+      this.mode = "add";
+      this.title = "Add new veichles"; 
+    }
+  })
+}
 
   ngOnInit(): void {
     this.pageSettings = { pageSize: 6 };
+    this.initializeValues();
     this.commands = [
     { buttonOption: { content: 'x', cssClass: '' } }
     ];
@@ -66,18 +87,25 @@ export class AddViechleComponent implements OnInit {
 
   }
   addViechlesToDb() {
-    const viechles = this.data as Viechle[];
-    console.log(this.data);
-    this.viechleService.addViechles(viechles).subscribe(errorRes => {
-      if (errorRes == '') {
-       
-         this.router.navigate(['/ws/viechle']);
-      }
-      else {
-        console.log('error is:', errorRes);
-        
-      }
-    });
+    if(this.mode == "add"){
+      const viechles = this.data as Viechle[];
+      console.log(this.data);
+      this.viechleService.addViechles(viechles).subscribe(errorRes => {
+        if (errorRes == '') {
+         
+           this.router.navigate(['/ws/viechle']);
+        }
+        else {
+          console.log('error is:', errorRes);
+          
+        }
+      });
+    }else{
+      const viechleData: Viechle = this.form.value;
+      this.viechleService.editViechle(viechleData, this.viechleId).then(res => {
+        this.router.navigate(['/ws/viechle'])
+      });
+    }
   }
   cancel() {
     this.router.navigate(['/ws/viechle']);

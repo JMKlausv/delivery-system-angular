@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Product } from 'src/app/model/product.interface';
-import { ProductService } from '../product.service';
+import { ProductService } from '../../product.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,7 +25,7 @@ export class ProductListComponent implements OnInit {
   }
   viewProduct(rowData: any) {
   
-   this.router.navigate(['ws/product',rowData.id])
+   this.router.navigate(['ws/product/new'],{queryParams:{id:rowData.id}})
   }
   deleteProduct(rowData: any) {
     if (window.confirm('are you sure')) {

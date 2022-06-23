@@ -6,7 +6,6 @@ import { AddViechleComponent } from './add-viechle/add-viechle.component';
 //import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminGuard } from '../shared/admin.guard';
-import { ViechleDetailComponent } from './viechle-detail/viechle-detail.component';
 import { ViechleResolve } from './viechle.resolve';
 import { SharedModule } from '../shared/shared.module';
 import { PageService, SortService, FilterService, GroupService , CommandColumnService  } from '@syncfusion/ej2-angular-grids';
@@ -25,12 +24,7 @@ const routes: Routes = [
       {
         path: 'new',
         pathMatch:'full',
-        component:AddViechleComponent
-      },
-      {
-        path: ':id',
-         pathMatch:'full',
-        component: ViechleDetailComponent,
+        component:AddViechleComponent,
         resolve: {
           viechle: ViechleResolve
         }
@@ -43,10 +37,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ViechleListComponent,
-
     AddViechleComponent,
-
-    ViechleDetailComponent
   ],
   imports: [
     CommonModule,

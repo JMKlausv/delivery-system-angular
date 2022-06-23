@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommandModel, EditSettingsModel, GridComponent, PageSettingsModel } from '@syncfusion/ej2-angular-grids';
 import { Category } from 'src/app/model/category.interface';
-import { ProductService } from '../product.service';
+import { ProductService } from '../../product.service';
 
 @Component({
   selector: 'app-category-list',
@@ -27,8 +27,13 @@ export class CategoryListComponent implements OnInit {
       this.categories = res;
     })
   }
+  ionViewDidEnter(){
+    this.productService.fetchCategories().subscribe(res => {
+      this.categories = res;
+    })
+  }
   editCategory(rowData:any){
-
+this.router.navigate(['/ws/product/categories/new'],{state:rowData})
   }
   deleteCategory(rowData: any) {
     if (window.confirm('are you sure')) {

@@ -28,7 +28,11 @@ export class ProductService {
   fetchSingleProduct(id: string) {
    
     return  this.sharedService.fetchSingle(API + "products/" + id + '.json').pipe(map((res) => {
-      return res as Product;
+      let  product!: Object;
+      if(id){
+        product = {...res,id:id};
+      }
+      return product as Product;
     })).toPromise();
   }
   editProduct(product: Product, id:string) {

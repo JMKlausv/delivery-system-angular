@@ -1,7 +1,7 @@
 
 <div class="wrapper">
     <div>
-        <legend>Add new products</legend>
+        <legend>{{title}}</legend>
     </div>
     <form [formGroup]="form" (ngSubmit)="addProductToDb()" novalidate>
 <div class="form-cont">
@@ -33,7 +33,7 @@
         </label>
         <input type="number" formControlName="quantity">
     </div>
-    <app-shared-button-add (add)="addProduct()"></app-shared-button-add>
+    <app-shared-button-add *ngIf="mode=='add'" (add)="addProduct()"></app-shared-button-add>
 </div>
         
         <div formArrayName="products" >

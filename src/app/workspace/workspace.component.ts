@@ -53,26 +53,25 @@ public dockSize:string ="44px";
 public mediaQuery: string = ('(min-width: 600px)');
 public target: string = '.main-content';
 public data:Object =[ {
-  nodeId: '01', nodeText: 'Dashboard', cssClass: 'e-flat', iconCss: 'e-icons e-search',
+  nodeId: '01', nodeText: 'Dashboard', cssClass: 'e-flat',
   url:'/ws/dashboard'
 },
 
 {
-  nodeId: '02', nodeText: 'product Information', iconCss: 'icon-th icon',
-
+  nodeId: '02', nodeText: 'product Information',
   nodeChild: [
-      { nodeId: '02-01', nodeText: 'categories', iconCss: 'icon-circle-thin icon' ,url:'/ws/product/categories'},
-      { nodeId: '02-02', nodeText: 'products', iconCss: 'icon-circle-thin icon' ,url:'/ws/product'}, 
+      { nodeId: '02-01', nodeText: 'categories' ,url:'/ws/product/categories'},
+      { nodeId: '02-02', nodeText: 'products' ,url:'/ws/product'}, 
   ]
 },
 {
-nodeId: '03', nodeText: 'Orders', iconCss: 'icon-docs icon', url:'/ws/order'
+nodeId: '03', nodeText: 'Orders', url:'/ws/order'
 },
 {
-nodeId: '04', nodeText: 'Viechles', iconCss: 'icon-docs icon', url:'/ws/viechle'
+nodeId: '04', nodeText: 'Viechles', url:'/ws/viechle'
 }, 
 {
-  nodeId: '06', nodeText: 'Logout', iconCss: 'icon-chrome icon',
+  nodeId: '06', nodeText: 'Logout', 
 },];
 public field:Object ={ dataSource: this.data, id: 'nodeId', text: 'nodeText', child: 'nodeChild', iconCss: 'iconCss' ,routerLink:'url'};
 public field$:BehaviorSubject<Object>=new BehaviorSubject<Object>(this.field);
@@ -88,17 +87,17 @@ public field$:BehaviorSubject<Object>=new BehaviorSubject<Object>(this.field);
       this.user = 'System User';
       this.isAdmin = false;
       this.data= [{
-        nodeId: '01', nodeText: 'Dashboard', iconCss: 'icon-microchip icon',
+        nodeId: '01', nodeText: 'Dashboard',
         url:'/ws/dashboard'
       },
      
       {
-      nodeId: '03', nodeText: 'Orders', iconCss: 'icon-docs icon', url:'/ws/order'
+      nodeId: '03', nodeText: 'Orders',  url:'/ws/order'
       },
       {
-        nodeId: '06', nodeText: 'Logout', iconCss: 'icon-chrome icon',
+        nodeId: '06', nodeText: 'Logout', 
       },]
-      this.field$.next({ dataSource: this.data, id: 'nodeId', text: 'nodeText', child: 'nodeChild', iconCss: 'iconCss' ,routerLink:'url'});
+      this.field$.next({ dataSource: this.data, id: 'nodeId', text: 'nodeText', child: 'nodeChild', routerLink:'url'});
 
   }
   }

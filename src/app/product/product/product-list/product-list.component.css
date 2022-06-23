@@ -3,7 +3,7 @@
     justify-content:space-between
 }
 .edit-btn {
-    background-image: url('../../../assets/img/edit.svg') no-repeat;
+    background-image: url('../../../../assets/img/edit.svg') no-repeat;
     color:rgb(100, 153, 21);
 }
 .delete-btn {

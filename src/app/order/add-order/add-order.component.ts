@@ -19,13 +19,16 @@ const API = 'https://delivery-system-angular-default-rtdb.firebaseio.com/';
 })
 export class AddOrderComponent implements OnInit {
 
-
+  public mode!:string;
+  public title!:string;
+  public orderId!:any;
   public order!: Order;
   public viechleList: Viechle[] = [];
   public productList: Product[] = [];
   public categoryList: Category[] = [];
   public pageSettings!: PageSettingsModel;
   public commands!: CommandModel[];
+  
   public selectedProducts: { product: Product, quantity: number }[] = [];
   public regionList: string[] = [
     'Amhara','Orormia','Harar','Somalie'
@@ -143,9 +146,40 @@ export class AddOrderComponent implements OnInit {
     }
    
 }
-
+private initializeForm(o:Order){
+    this.orderId = o.id;
+    this.region.setValue(o.orderAddress.region);
+    this.city.setValue(o.orderAddress.city);
+    this.specificAddress.setValue(o.orderAddress.specificAddress);
+    this.customerEmail.setValue(o.orderAddress.customerEmail);
+    this.phone.setValue(o.orderAddress.phone);
+    this.orderDate.setValue(o.orderDate);
+    this.deliveryDate.setValue(o.deliveryDate);
+    this.viechle.setValue(o.viechleId)
+    o.products.forEach(p=>{
+      this.selectedProducts.push(p)
+    })
+    const newProductGroup = new FormGroup({});
+    this.productArray.push(newProductGroup);
+  
+ 
+}
   ngOnInit(): void {
     this.pageSettings = { pageSize: 6 };
+    
+    this.order$.subscribe(order=>{
+      console.log('what is hapeening',order)
+      if(order){
+
+        this.mode="update";
+        this.title ="Update Order";
+       this.initializeForm(order);
+      }else{
+        this.mode='add';
+        this.title="Add New Order";
+      }
+    })
+   
     
     this.commands = [
       { buttonOption: { content: 'x', cssClass: '' } }
@@ -179,11 +213,11 @@ export class AddOrderComponent implements OnInit {
 
   }
   addOrderToDb() {
-    let selectedP: { productId: string,  productName:string, quantity: number }[] = [];
+    let selectedP: { product: Product,quantity: number }[] = [];
     let totalSum = 0
     this.selectedProducts.forEach(p => {
       if (p.product.id)
-        selectedP.push({ productId: p.product.id, productName: p.product.name,quantity: p.quantity });
+        selectedP.push({ product: p.product,quantity: p.quantity });
       totalSum +=( p.product.price * p.quantity);
     })
     this.order = {
@@ -215,15 +249,25 @@ export class AddOrderComponent implements OnInit {
         });
      })
    
-    })
-    this.orderService.addOrder(this.order).then(res => {
+    });
+    if(this.mode == "add"){
+      this.orderService.addOrder(this.order).then(res => {
       
-      this.router.navigate(['/ws/order']);
-    },
-      error => {
-      console.log(error);
+        this.router.navigate(['/ws/order']);
+      },
+        error => {
+        console.log(error);
+      }
+      )
+    }else if(this.mode == "update"){
+      this.orderService.editOrder(this.order,this.orderId).then(res => {
+        this.router.navigate(['/ws/order']);
+      },
+        error => {
+        console.log(error);
+      });
     }
-    )
+  
 
   }
   cancel() {
@@ -246,7 +290,6 @@ export class AddOrderComponent implements OnInit {
 
   onCategoryChange(args: any) {
     this.category.setValue(args.itemData.id)
-    console.log('change happp.......', this.category.value);
     this.fetchProducts(args.itemData.id).subscribe();
   }
 

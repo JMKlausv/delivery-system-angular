@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductListComponent } from './product-list/product-list.component';
-import { AddProductComponent } from './add-product/add-product.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductListComponent } from './product/product-list/product-list.component';
+import { AddProductComponent } from './product/add-product/add-product.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductResolve } from './product.resolve';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
-import { AddCategoryComponent } from './add-category/add-category.component';
-import { CategoryListComponent } from './category-list/category-list.component';
+import { AddCategoryComponent } from './category/add-category/add-category.component';
+import { CategoryListComponent } from './category/category-list/category-list.component';
 import { AdminGuard } from '../shared/admin.guard';
+import { CategoryResolve } from './category.resolve';
 
 
 const routes: Routes = [
@@ -24,7 +24,10 @@ const routes: Routes = [
       {
         path: 'new',
         pathMatch:'full',
-        component:AddProductComponent
+        component:AddProductComponent,
+        resolve:{
+          product:ProductResolve
+        }
       },
       {
         path: 'categories',
@@ -34,16 +37,19 @@ const routes: Routes = [
       {
         path: 'categories/new',
         pathMatch: 'full',
-        component:AddCategoryComponent
+        component:AddCategoryComponent,
+        // resolve:{
+        //   category:CategoryResolve
+        // }
       },
-      {
-        path: ':id',
-         pathMatch:'full',
-        component: ProductDetailComponent,
-        resolve:{
-          product:ProductResolve
-        }
-      },
+      // {
+      //   path: ':id',
+      //    pathMatch:'full',
+      //   component: ProductDetailComponent,
+      //   resolve:{
+      //     product:ProductResolve
+      //   }
+      // },
 
     ]
   },
@@ -55,7 +61,6 @@ const routes: Routes = [
   declarations: [
     ProductListComponent,
     AddProductComponent,
-    ProductDetailComponent,
     AddCategoryComponent,
     CategoryListComponent
   ],
@@ -67,6 +72,7 @@ const routes: Routes = [
   ],
   providers: [
     ProductResolve,
+    CategoryResolve,
     AdminGuard
   ]
 })

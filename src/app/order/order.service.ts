@@ -23,7 +23,11 @@ export class OrderService {
   fetchSingleOrder(id: string) {
    
     return  this.sharedService.fetchSingle(API + "/" + id + '.json').pipe(map((res) => {
-      return res as Order;
+   let order!:Object ;
+   if(id){
+    order={...res,id:id};
+   }
+    return order as Order;
     })).toPromise();
   }
   editOrder(order: Order, id:string) {

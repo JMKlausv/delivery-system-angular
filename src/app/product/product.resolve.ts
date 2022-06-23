@@ -11,7 +11,7 @@ export class ProductResolve implements Resolve<Product>{
    
  }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Product | Observable<Product> | Promise<Product> {
-    return this.productService.fetchSingleProduct(route.params.id);
+    return this.productService.fetchSingleProduct(route.queryParamMap.get('id')as string);
   }
   
 }

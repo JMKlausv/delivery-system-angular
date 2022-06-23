@@ -28,7 +28,11 @@ export class ViechleService {
   fetchSingleViechle(id: string) {
    
     return  this.sharedService.fetchSingle(API + "/" + id + '.json').pipe(map((res) => {
-      return res as Viechle;
+      let viechle!:Object;
+      if(id){
+        viechle = {...res,id:id}
+      }
+      return viechle as Viechle;
     })).toPromise();
   }
   editViechle(viechle: Viechle, id:string) {

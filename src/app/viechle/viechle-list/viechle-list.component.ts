@@ -25,7 +25,7 @@ export class ViechleListComponent implements OnInit {
   }
   viewViechle(rowData: any) {
   
-   this.router.navigate(['/ws/viechle',rowData.id])
+   this.router.navigate(['/ws/viechle/new'],{queryParams:{id:rowData.id}})
   }
   deleteViechle(rowData: any) {
     if (window.confirm('are you sure')) {

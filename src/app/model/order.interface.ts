@@ -1,6 +1,9 @@
+import { Product } from "./product.interface";
+
 export interface Order{
   id?: string;
-  products: {productId:string, productName:string,quantity:number}[];
+  // products: {productId:string, productName:string,quantity:number}[];
+  products:{product:Product,quantity:number}[];
   viechleId: string;
   totalPrice: number;
   orderDate: Date;

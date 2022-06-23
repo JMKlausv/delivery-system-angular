@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
-import { Observable } from "rxjs";
 import { Viechle } from "../model/viechle.interface";
 import { ViechleService } from "./viechle.service";
 
@@ -12,7 +11,7 @@ export class ViechleResolve implements Resolve<Viechle>{
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<Viechle> {
 
    
-    return this.viechleService.fetchSingleViechle(route.params.id);
+    return this.viechleService.fetchSingleViechle(route.queryParamMap.get('id')as string);
   }
 
 }

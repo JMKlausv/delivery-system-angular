@@ -23,13 +23,13 @@ export class EjsGridComponent implements OnInit {
 
   ngOnInit(): void {
     this.pageSettings = { pageSize: 6 };
+
     this.editSettings = { allowEditing: true, allowDeleting: true };
     this.commands = [{ type:"Edit",buttonOption: { cssClass: 'e-flat', iconCss: 'e-edit e-icons' } },
     {type:"Delete", buttonOption: { cssClass: 'e-flat', iconCss: 'e-delete e-icons' } }
     ];
   }
   commandClick(args: any) {
-    console.log("commanddddddddddd...........",args.target)
     if (args.target.title == 'Delete') {
       this.delete.emit(args.rowData);
     } else if (args.target.title == 'Edit') {
