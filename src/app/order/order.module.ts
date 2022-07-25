@@ -8,6 +8,8 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { AggregateService } from '@syncfusion/ej2-angular-grids';
 import { JoinPipe } from '../shared/join.pipe';
 import { OrderResolve } from './order.resolve';
+import { ProductService } from '../product/product.service';
+import { ViechleService } from '../viechle/viechle.service';
 const routes: Routes = [
   {
     path: '',
@@ -43,7 +45,9 @@ const routes: Routes = [
   providers: [
     AggregateService,
     JoinPipe,
-    OrderResolve
+    OrderResolve,
+    ProductService,
+    ViechleService
    
   ]
 })

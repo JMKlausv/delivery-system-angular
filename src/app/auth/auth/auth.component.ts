@@ -18,14 +18,16 @@ export class AuthComponent implements OnInit {
   }
   login(userInput: { email: string, password: string }) {
     this.authService.login(userInput.email, userInput.password).then(res => {
-      this.router.navigate(['ws/dashboard']);
+     this.router.navigate(['ws/dashboard']);
+    
      
     }).catch(e => console.log(e.message));
   }
   signup(userInput: { email: string, password: string })
  {
     this.authService.signup(userInput.email, userInput.password).then(res => {
-      this.router.navigate(['ws/dashboard']);
+      // this.router.navigate(['ws/dashboard']);
+     this.router.navigate(['/auth'])
     }).catch(e => console.log(e.message));
    
   }

@@ -8,10 +8,13 @@ import { Category } from 'src/app/model/category.interface';
 import { Order } from 'src/app/model/order.interface';
 import { Product } from 'src/app/model/product.interface';
 import { Viechle } from 'src/app/model/viechle.interface';
+import { ProductService } from 'src/app/product/product.service';
 import { SharedService } from 'src/app/shared/shared.service';
+import { ViechleService } from 'src/app/viechle/viechle.service';
 import { OrderService } from '../order.service';
 
 const API = 'https://delivery-system-angular-default-rtdb.firebaseio.com/';
+const API2:string = "https://localhost:7247/api/";
 @Component({
   selector: 'app-add-order',
   templateUrl: './add-order.component.html',
@@ -57,7 +60,7 @@ export class AddOrderComponent implements OnInit {
     products: new FormArray([
     ])
   })
-  constructor(private router: Router, private orderService: OrderService, private sharedService: SharedService, private route:ActivatedRoute) { }
+  constructor(private router: Router, private orderService: OrderService, private productService: ProductService,private viechleService:ViechleService, private route:ActivatedRoute) { }
   order$: Observable<Order> = this.route.data?.pipe(pluck('order'));
   get productArray(): FormArray {
     return (this.form.get('products') as FormArray);
@@ -101,20 +104,27 @@ export class AddOrderComponent implements OnInit {
   }
 
   private fetchViechles() {
-   return   this.sharedService.fetchAll('https://delivery-system-angular-default-rtdb.firebaseio.com/viechles.json').pipe(map(res => {
+   return   this.viechleService.fetchViechles().subscribe(res=>{
       this.viechleList = res as Viechle[];
-    }));
+    });
 
   }
   private fetchProducts(categoryId:string ) {
-    return this.sharedService.fetchAll('https://delivery-system-angular-default-rtdb.firebaseio.com/products.json?orderBy="category/id"&equalTo="' + categoryId + '"').pipe(map(res => {
-      this.productList= res as Product[];
-    }));
+    // return this.sharedService.fetchAll('https://delivery-system-angular-default-rtdb.firebaseio.com/products.json?orderBy="category/id"&equalTo="' + categoryId + '"').pipe(map(res => {
+    //   this.productList= res as Product[];
+    // }));
+    return this.productService.fetchCategoryProducts(categoryId).subscribe(res=>{
+      this.productList = res as Product[];
+      console.log(this.productList);
+    })
   }
   private fetchCategories() {
-    return this.sharedService.fetchAll('https://delivery-system-angular-default-rtdb.firebaseio.com/categories.json').pipe(map(res => {
-      this.categoryList= res as Category[];
-    }));
+    // return this.sharedService.fetchAll('https://delivery-system-angular-default-rtdb.firebaseio.com/categories.json').pipe(map(res => {
+    //   this.categoryList= res as Category[];
+    // }));
+    return this.productService.fetchCategories().subscribe(res=>{
+      this.categoryList = res as Category[];
+    })
   }
 
   private updateCategorycountMap(categoryId: string, cmd: string, quantity: number) {
@@ -184,8 +194,8 @@ private initializeForm(o:Order){
     this.commands = [
       { buttonOption: { content: 'x', cssClass: '' } }
     ];
-    this.fetchViechles().subscribe();
-    this.fetchCategories().subscribe();
+    this.fetchViechles();
+    this.fetchCategories();
   }
   addProduct() {
     const productId = this.product.value;
@@ -239,14 +249,15 @@ private initializeForm(o:Order){
       let cat: Category;
       let count: any = cm.get(key);
       let catApi: string = API + 'categories/' + key + '.json';
-      this.sharedService.fetchSingle(catApi).subscribe(res => {
+      this.productService.fetchSingleCategory(key).then(res => {
         cat = res as Category;
         if (cat.orderCount) {
           count +=cat.orderCount;
         }
-        this.sharedService.patch({ "orderCount": count as number}, catApi).subscribe(res => {
-          console.log('loop',res);
-        });
+        this.productService.updateCategoryOrderCount(key,count as number).subscribe();
+        // this.sharedService.patch({ "orderCount": count as number}, catApi).subscribe(res => {
+        //   console.log('loop',res);
+        // });
      })
    
     });
@@ -290,7 +301,10 @@ private initializeForm(o:Order){
 
   onCategoryChange(args: any) {
     this.category.setValue(args.itemData.id)
-    this.fetchProducts(args.itemData.id).subscribe();
+    this.fetchProducts(args.itemData.id);
+
+    console.log("xcvbnm,,,mnbvccvbnm,mnbvbnm,,,,,,,,,,,,,,,,,,,,,,",args.itemData.id);
+
   }
 
 

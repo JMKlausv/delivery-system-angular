@@ -4,6 +4,7 @@ import { Category } from 'src/app/model/category.interface';
 import { Order } from 'src/app/model/order.interface';
 import { SharedService } from 'src/app/shared/shared.service';
 const API: string = "https://delivery-system-angular-default-rtdb.firebaseio.com/";
+const API2:string = "https://localhost:7247/api/";
 @Component({
   selector: 'app-piechart',
   templateUrl: './piechart.component.html',
@@ -21,7 +22,8 @@ export class PiechartComponent implements OnInit {
   public legendSettings!: Object;
   constructor(private sharedService:SharedService){}
   ngOnInit(): void {
-    this.sharedService.fetchAll(API + 'categories.json').subscribe(res => {
+    // this.sharedService.fetchAll(API + 'categories.json').subscribe(res => {
+    this.sharedService.fetchAll(API2 + 'Category').subscribe(res => {
       this.categories = res as Category[];
       console.log('atttt', this.categories)
       this.categories.forEach(cat => {

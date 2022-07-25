@@ -24,7 +24,7 @@ export class AddViechleComponent implements OnInit {
   form = new FormGroup({
     model: new FormControl('',[Validators.required]),
     type: new FormControl('',[Validators.required]),
-    licenceNum: new FormControl('',[Validators.required]),
+    licenceNumber: new FormControl('',[Validators.required]),
     viechles: new FormArray([
      
     ])
@@ -38,14 +38,16 @@ export class AddViechleComponent implements OnInit {
   get type():FormControl {
     return (this.form.get('type') as FormControl) ;
   }
-  get licenceNum():FormControl {
-    return (this.form.get('licenceNum') as FormControl) ;
+  get licenceNumber():FormControl {
+    return (this.form.get('licenceNumber') as FormControl) ;
   }
   constructor(private router:Router,private viechleService:ViechleService , private route:ActivatedRoute) { }
 
 private initializeValues(){
+  
   this.viechle$.subscribe(v=>{
-    if(v){
+    if(v!=null){
+      console.log("found veichle",v)
       this.mode = "update";
       this.title = "Update veichle";
       this.form.patchValue(v);
@@ -70,13 +72,13 @@ private initializeValues(){
   addViechle() {
     const model = this.model.value;
     const type = this.type.value;
-    const licenceNum = this.licenceNum.value;
-    if (model && type && licenceNum) {
+    const licenceNumber = this.licenceNumber.value;
+    if (model && type && licenceNumber) {
       
       const newViechleGroup = new FormGroup({
         model: new FormControl({ value: model, disabled: true },),
         type: new FormControl({ value: type, disabled: true }),
-        licenceNum: new FormControl({ value: licenceNum, disabled: true }),
+        licenceNumber: new FormControl({ value: licenceNumber, disabled: true }),
       });
       this.viechleArray.clear();
       this.viechleArray.push(newViechleGroup)
@@ -116,7 +118,7 @@ private initializeValues(){
     const oldData = this.data;
     this.data = [];
     oldData.forEach(d => {
-      if (d.licenceNum == argsData.licenceNum && d.model == argsData.model && d.type == argsData.type) {
+      if (d.licenceNumber == argsData.licenceNumber && d.model == argsData.model && d.type == argsData.type) {
       
       } else {
       this.data.push(d);  

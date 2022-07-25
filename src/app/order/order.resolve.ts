@@ -8,11 +8,14 @@ import { OrderService } from "./order.service";
 
 @Injectable()
   
-export class OrderResolve implements Resolve<Order>{
+export class OrderResolve implements Resolve<Order |undefined>{
   constructor(private orderService: OrderService) {
    
  }
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Order | Observable<Order> | Promise<Order> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Order | Observable<Order> | Promise<Order> |undefined{
+    if(!route.queryParamMap.get('id')){
+      return undefined;
+    }
     return this.orderService.fetchSingleOrder(route.queryParamMap.get('id')as string);
   }
   

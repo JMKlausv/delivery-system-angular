@@ -1,7 +1,9 @@
 export interface User{
-  localId:string,
+  //localId:string,
+  userId:number,
   email: string,
   previllage: string,
-  expDate?: Date,
+  expDate?: Date | null,
   idToken?:string,
+ 
 }

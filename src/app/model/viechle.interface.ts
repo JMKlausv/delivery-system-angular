@@ -1,6 +1,6 @@
 export interface Viechle{
-  id?: string;
-  model: string;
-  type: string;
-  licenceNum: string;
+ readonly id?: number;
+ readonly model: string;
+ readonly type: string;
+ readonly licenceNumber: string;
 }

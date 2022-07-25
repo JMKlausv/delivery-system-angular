@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 //import { SidebarModule } from '@syncfusion/ej2-angular-navigations';
 // import {SidebarModule } from 'cdbangular';
 import { DashboardLayoutModule } from '@syncfusion/ej2-angular-layouts';
-import { SidebarModule } from 'ng-cdbangular';
+// import { SidebarModule } from 'ng-cdbangular';
 import { ChartComponent } from './chart/chart.component';
 import { ChartModule} from '@syncfusion/ej2-angular-charts';
 import { AccumulationChartModule } from '@syncfusion/ej2-angular-charts';
@@ -26,7 +26,7 @@ const routes: Routes = [
     CommonModule,
     DashboardLayoutModule,
     ChartModule,
-   SidebarModule,
+  //  SidebarModule,
    AccumulationChartModule,
     // CDBFreeModule,
     RouterModule.forChild(routes)

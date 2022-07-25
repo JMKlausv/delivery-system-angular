@@ -18,6 +18,7 @@ import { PageService, SortService, FilterService, GroupService } from '@syncfusi
 import { AdminGuard } from './shared/admin.guard';
 import { WorkspaceComponent } from './workspace/workspace.component';
 // import { SidebarModule } from '@syncfusion/ej2-angular-navigations';
+import { JwtModule } from "@auth0/angular-jwt";
 const routes: Routes = [
   {
     path: '',
@@ -48,7 +49,6 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    // SidebarModule,
     AuthModule,
     GridModule,
     OrderModule,
@@ -58,6 +58,16 @@ const routes: Routes = [
     HttpClientModule,
     // SidebarModule,
     RouterModule.forRoot(routes),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: ()=>{
+          return localStorage.getItem("access_token");
+        },
+        allowedDomains: ["https://localhost:7247/"],
+       // disallowedRoutes: ["http://example.com/examplebadroute/"],
+       skipWhenExpired: true,
+      },
+    }),
   
   ],
   providers: [

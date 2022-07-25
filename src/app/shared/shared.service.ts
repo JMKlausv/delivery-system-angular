@@ -14,15 +14,20 @@ export class SharedService {
   constructor(private http: HttpClient) { }
 
   fetchAll(API: string) {
-    return this.http.get<{ [key: string]: object}>(API).pipe(map((res) => {
-      const resData: object[] = [];
-      for (const key in res) {
-        resData.push({
-          ...res[key], id: key,
-        })
-      }
-      return resData;
+
+
+    return this.http.get(API).pipe(map(res=>{
+      return res as Object[];
     }));
+    // return this.http.get<{ [key: string]: object}>(API).pipe(map((res) => {
+    //   const resData: object[] = [];
+    //   for (const key in res) {
+    //     resData.push({
+    //       ...res[key], id: key,
+    //     })
+    //   }
+    //   return resData;
+    // }));
   }
 
   fetchSingle( API:string) {

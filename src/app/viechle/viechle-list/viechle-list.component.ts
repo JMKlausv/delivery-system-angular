@@ -14,7 +14,7 @@ export class ViechleListComponent implements OnInit {
   columnData: { field: string, headerText: string }[] = [
     { field: 'model', headerText: 'Model' },
     { field: 'type', headerText: 'Type' },
-    { field: 'licenceNum', headerText: 'Licence plate' },
+    { field: 'licenceNumber', headerText: 'Licence plate' },
   ];
   constructor(private viechleService:ViechleService , private router:Router) { }
 
@@ -34,4 +34,5 @@ export class ViechleListComponent implements OnInit {
       })
     }
   }
+ 
 }

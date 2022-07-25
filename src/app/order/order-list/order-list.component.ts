@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Order } from 'src/app/model/order.interface';
+import { OrderDb } from 'src/app/model/orderDb';
 import { JoinPipe } from 'src/app/shared/join.pipe';
 import { OrderService } from '../order.service';
 
@@ -11,15 +12,19 @@ import { OrderService } from '../order.service';
   styleUrls: ['./order-list.component.css']
 })
 export class OrderListComponent implements OnInit {
-  orders: Order[] = [];
+  orders: OrderDb[] = [];
   orderData: Object[] = [];
   orderData$: Subject<Object[]> = new Subject<Object[]>();
   columnData: { field: string, headerText: string }[] = [
     { field: 'products', headerText: 'Products' },
-    { field: 'viechleId', headerText: 'Viechle id' },
+    { field: 'viechleLicence', headerText: 'Viechle Licence' },
     { field: 'totalPrice', headerText: 'Total Price' },
     { field: 'orderDate', headerText: 'Order Date' },
-    { field: 'deliveryDate', headerText: 'Delivery Date' }
+    { field: 'deliveryDate', headerText: 'Delivery Date' },
+    { field: 'userEmail', headerText: 'User Email' },
+    // { field: 'city', headerText: 'City' },
+    // { field: 'region', headerText: 'Region' },
+    // { field: 'phone', headerText: 'Phone number' },
   ];
   constructor(private orderService:OrderService , private router:Router , private join : JoinPipe) { }
    ngOnInit() {
@@ -28,16 +33,23 @@ export class OrderListComponent implements OnInit {
       this.orders.forEach(o => {
         let productNames: string[] = [];
         o.products.forEach(p => {
-          productNames.push(p.product.name);
-        })
+        //   productNames.push(p.product.name);
+        productNames.push(p.productName);
+        });
+        console.log("row data idddddddd......",o.id)
            this.orderData.push(
           {
             id: o.id,
-            viechleId: o.viechleId,
+            viechleLicence: o.viechleLicenceNumber,
             orderDate: o.orderDate,
             deliveryDate: o.deliveryDate,
             totalPrice: o.totalPrice,
             products: productNames.join(','),
+            userEmail: o.orderAddress.customerEmail,
+            city:o.orderAddress.city,
+            region:o.orderAddress.region,
+            phone:o.orderAddress.phone
+
           }
         );
       });
