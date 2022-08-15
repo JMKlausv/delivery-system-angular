@@ -296,7 +296,7 @@ private initializeForm(o:Order){
         this.selectedProducts.push(d);
       }
     });
-    this.updateCategorycountMap(argsData.product.category.id, 'remove', argsData.quantity);
+    this.updateCategorycountMap(argsData.product.categoryId, 'remove', argsData.quantity);
   }
 
   onCategoryChange(args: any) {

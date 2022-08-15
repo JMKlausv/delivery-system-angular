@@ -17,10 +17,6 @@ export class DashboardComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    // this.sharedService.fetchAll(API+'products.json').subscribe(res => this.productCount = res.length);
-    // this.sharedService.fetchAll(API+'orders.json').subscribe(res => this.orderCount = res.length);
-    // this.sharedService.fetchAll(API+'viechles.json').subscribe(res => this.veichleCount = res.length);  
-    
     this.sharedService.fetchAll(API2+'Product').subscribe(res => this.productCount = res.length);
     this.sharedService.fetchAll(API2+'Order').subscribe(res => this.orderCount = res.length);
     this.sharedService.fetchAll(API2+'Viechle').subscribe(res => this.veichleCount = res.length);

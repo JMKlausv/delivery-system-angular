@@ -35,6 +35,8 @@ export class SharedService {
     return this.http.get(API);
   }
   edit(data: object, API:string) {
+    console.log("api: ---- ",API);
+    console.log("data:--- ", data);
     return this.http.put(API , data);
   }
   delete(API: string) {

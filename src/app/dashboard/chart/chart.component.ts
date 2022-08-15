@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/model/order.interface';
 import { SharedService } from 'src/app/shared/shared.service';
-const API: string = "https://delivery-system-angular-default-rtdb.firebaseio.com/orders.json";
+// const API: string = "https://delivery-system-angular-default-rtdb.firebaseio.com/orders.json";
+const API2:string = "https://localhost:7247/api/Order";
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
@@ -18,14 +19,14 @@ export class ChartComponent implements OnInit {
   }
   ngOnInit(): void {
       // Title for chart
-    this.sharedService.fetchAll(API).subscribe(res => {
+    this.sharedService.fetchAll(API2).subscribe(res => {
       const orders = res as Order[];
       orders.forEach(o => {
         let date = new Date(o.orderDate).getMonth();
         this.monthOrderCounts[date - 1] += o.totalPrice;
         })
     });
-    console.log(this.monthOrderCounts)
+    // console.log(this.monthOrderCounts)
     this.title = 'Orders Analysis';
 
     for (let i = 0; i < 12; i++){

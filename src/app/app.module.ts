@@ -9,7 +9,7 @@ import { ProductModule } from './product/product.module';
 import { ViechleModule } from './viechle/viechle.module';
 import { DashboardModule } from '../app/dashboard/dashboard.module';
 // import { SidebarModule } from 'ng-cdbangular';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './auth/auth.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CookieService } from 'ngx-cookie-service';
@@ -19,6 +19,7 @@ import { AdminGuard } from './shared/admin.guard';
 import { WorkspaceComponent } from './workspace/workspace.component';
 // import { SidebarModule } from '@syncfusion/ej2-angular-navigations';
 import { JwtModule } from "@auth0/angular-jwt";
+import { AppHttpInterceptor } from './AppHttpInterceptor.service';
 const routes: Routes = [
   {
     path: '',
@@ -74,7 +75,11 @@ const routes: Routes = [
     AuthGuard,
     CookieService,
     PageService,
-  
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppHttpInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

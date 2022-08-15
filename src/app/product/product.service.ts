@@ -98,6 +98,7 @@ export class ProductService {
     var jsonPatchDoc = [
       {
         "path": "orderCount",
+        //"path": "OrderCount",
         "op": "replace",
         "value":`${orderCount}`
       }

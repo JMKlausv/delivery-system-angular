@@ -7,7 +7,7 @@ import { OrderDb } from '../model/orderDb';
 import { SharedService } from '../shared/shared.service';
 const API: string =
   'https://delivery-system-angular-default-rtdb.firebaseio.com/orders';
-const API2: string = 'https://localhost:7247/api/Order';
+const API2: string = 'https://localhost:7247/api/Order/';
 @Injectable({
   providedIn: 'root',
 })
@@ -49,7 +49,7 @@ export class OrderService {
     // );
   }
   fetchSingleOrder(id: string) {
-    return this.sharedService.fetchSingle(API2 + '/' + id ).pipe(map(res=>{
+    return this.sharedService.fetchSingle(API2  + id ).pipe(map(res=>{
    
       return res as Order;
     }))
@@ -68,13 +68,29 @@ export class OrderService {
 
   }
   editOrder(order: Order, id: number) {
-    return this.sharedService.edit(order, API2 + '/' + id).toPromise();
+    var productItems: { productId: number | undefined; quantity: number }[] =
+    [];
+  order.products.forEach((p) => {
+    productItems.push({
+      productId: p.product.id,
+      quantity: p.quantity,
+    });
+  });
+  var orderData = {
+    viechleId: order.viechleId,
+    products: productItems,
+    totalPrice: order.totalPrice,
+    orderDate: order.orderDate,
+    deliveryDate: order.deliveryDate,
+    orderAddress: order.orderAddress,
+  };
+    return this.sharedService.edit(orderData, API2  + id).toPromise();
 
     // return this.sharedService.edit(order, API + '/' + id + '.json').toPromise();
 
   }
   deleteOrder(id: number) {
-    return this.sharedService.delete(API2 + '/' + id ).toPromise();
+    return this.sharedService.delete(API2 + id ).toPromise();
 
     // return this.sharedService.delete(API + '/' + id + '.json').toPromise();
   }
