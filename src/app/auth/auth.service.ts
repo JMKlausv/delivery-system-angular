@@ -58,7 +58,7 @@ export class AuthService {
   private setCookies(tokenString:string) {
    var expDate:Date|null = this.jwt.getTokenExpirationDate(tokenString);
    var decodedToken = this.jwt.decodeToken(tokenString);
-
+   
    var email:string = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"];
    var role :string= decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
    var userId:string = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
